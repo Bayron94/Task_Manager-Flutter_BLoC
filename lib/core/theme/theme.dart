@@ -3,13 +3,22 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static final lightTheme = ThemeData(
     brightness: Brightness.light,
-    primaryColor: Colors.blue,
+    primaryColor: Colors.green.shade100.withOpacity(0.1),
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.grey,
       foregroundColor: Colors.white,
       elevation: 0,
     ),
+    colorScheme: ColorScheme.light(
+      surface: Colors.white,
+      background: Colors.grey.shade50,
+      primary: Colors.green,
+      secondary: Colors.teal,
+      error: Colors.red,
+    ),
+    cardColor: Colors.green.shade200,
+    secondaryHeaderColor: Colors.grey.shade300,
     textTheme: const TextTheme(
       displayLarge: TextStyle(
         fontSize: 32,
@@ -62,13 +71,21 @@ class AppTheme {
 
   static final darkTheme = ThemeData(
     brightness: Brightness.dark,
-    primaryColor: Colors.green,
+    primaryColor: Colors.grey.shade500.withOpacity(0.3),
     scaffoldBackgroundColor: Colors.grey.shade900,
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.green,
       foregroundColor: Colors.white,
       elevation: 0,
     ),
+    colorScheme: ColorScheme.dark(
+      primary: Colors.green,
+      secondary: Colors.teal,
+      surface: Colors.grey.shade800,
+      background: Colors.black,
+      error: Colors.red,
+    ),
+    cardColor: Colors.grey.shade900,
     textTheme: const TextTheme(
       displayLarge: TextStyle(
         fontSize: 32,
@@ -92,7 +109,7 @@ class AppTheme {
       ),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.green,
       foregroundColor: Colors.white,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(

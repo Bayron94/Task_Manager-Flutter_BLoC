@@ -5,6 +5,7 @@ import 'package:task_app_2024/features/task/data/repositories/repositories.dart'
 import 'package:task_app_2024/features/task/data/sources/sources.dart';
 import 'package:task_app_2024/features/task/domain/repositories/repositories.dart';
 import 'package:task_app_2024/features/task/domain/usecases/usecases.dart';
+import 'package:task_app_2024/features/task/presentation/blocs/blocs.dart';
 
 final getIt = GetIt.instance;
 
@@ -28,4 +29,12 @@ Future<void> setupLocator() async {
   getIt.registerLazySingleton(() => AddTaskUseCase(getIt<TaskRepository>()));
   getIt.registerLazySingleton(() => DeleteTaskUseCase(getIt<TaskRepository>()));
   getIt.registerLazySingleton(() => UpdateTaskUseCase(getIt<TaskRepository>()));
+
+  // Registrar el TaskBloc
+  getIt.registerFactory(() => TaskBloc(
+        getTasksUseCase: getIt<GetTasksUseCase>(),
+        addTaskUseCase: getIt<AddTaskUseCase>(),
+        updateTaskUseCase: getIt<UpdateTaskUseCase>(),
+        deleteTaskUseCase: getIt<DeleteTaskUseCase>(),
+      ));
 }
