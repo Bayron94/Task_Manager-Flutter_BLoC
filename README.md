@@ -90,7 +90,7 @@ lib/
 
 1. **Clona el repositorio**:
    ```
-   git clone [git@github.com:Bayron94/Task_Manager-Flutter_BLoC.git](https://github.com/Bayron94/Task_Manager-Flutter_BLoC.git)
+   git clone https://github.com/Bayron94/Task_Manager-Flutter_BLoC.git
    cd task-manager
    ```
 
