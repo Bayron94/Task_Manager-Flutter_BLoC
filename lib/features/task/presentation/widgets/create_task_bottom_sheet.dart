@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:task_app_2024/core/core.dart';
-import 'package:task_app_2024/features/task/presentation/blocs/blocs.dart';
+import 'package:task_app_2024/features/task/shared/shared.dart';
 
 class CreateTaskBottomSheet extends StatefulWidget {
-  const CreateTaskBottomSheet({super.key});
+  final void Function(String title, String description) onTaskCreated;
+
+  const CreateTaskBottomSheet({super.key, required this.onTaskCreated});
 
   @override
   State<CreateTaskBottomSheet> createState() => _CreateTaskBottomSheetState();
@@ -22,23 +22,14 @@ class _CreateTaskBottomSheetState extends State<CreateTaskBottomSheet> {
       setState(() => _isLoading = true);
 
       // Enviar el evento para crear la tarea
-      context.read<TaskBloc>().add(
-            AddTask(
-              _titleController.text,
-              description: _descriptionController.text,
-            ),
-          );
+      widget.onTaskCreated(
+        _titleController.text,
+        _descriptionController.text,
+      );
 
       Future.delayed(const Duration(seconds: 1), () {
         setState(() => _isLoading = false);
-        Fluttertoast.showToast(
-          msg: "Tarea creada exitosamente",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          backgroundColor: customPrimaryColor,
-          textColor: Colors.white,
-          fontSize: 16,
-        );
+        showCustomToast(context, "Tarea creada exitosamente");
         Navigator.of(context).pop();
       });
     }
