@@ -32,12 +32,16 @@ class MyApp extends StatelessWidget {
           create: (context) => getIt<TaskBloc>()..add(LoadTasks()),
         ),
       ],
-      child: MaterialApp(
-        title: 'Task Manager',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme().getTheme(),
-        home: const TasksScreen(),
-      ),
+      child: Builder(builder: (context) {
+        setupGlobalListeners(context);
+
+        return MaterialApp(
+          title: 'Task Manager',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme().getTheme(),
+          home: const TasksScreen(),
+        );
+      }),
     );
   }
 }
