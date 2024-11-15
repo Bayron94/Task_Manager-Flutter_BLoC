@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_app_2024/features/task/domain/entities/entities.dart';
 import 'package:task_app_2024/features/task/domain/usecases/usecases.dart';

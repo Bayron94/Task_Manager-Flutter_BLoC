@@ -2,7 +2,12 @@ part of 'task_bloc.dart';
 
 enum TaskFilter { all, completed, notCompleted }
 
-abstract class TaskState {}
+abstract class TaskState extends Equatable {
+  const TaskState();
+
+  @override
+  List<Object?> get props => [];
+}
 
 class TaskInitial extends TaskState {}
 
@@ -13,12 +18,13 @@ class TaskLoaded extends TaskState {
   final List<TaskEntity> filteredTasks;
   final TaskFilter filter;
 
-  TaskLoaded({
+  const TaskLoaded({
     required this.allTasks,
     required this.filteredTasks,
     this.filter = TaskFilter.all,
   });
 
+  @override
   List<Object?> get props => [allTasks, filteredTasks, filter];
 
   TaskLoaded copyWith({
@@ -37,5 +43,8 @@ class TaskLoaded extends TaskState {
 class TaskError extends TaskState {
   final String message;
 
-  TaskError(this.message);
+  const TaskError(this.message);
+
+  @override
+  List<Object?> get props => [message];
 }
