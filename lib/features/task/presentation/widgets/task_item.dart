@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_app_2024/core/core.dart';
 import 'package:task_app_2024/features/task/domain/entities/entities.dart';
 
 class TaskItem extends StatelessWidget {
@@ -23,7 +24,7 @@ class TaskItem extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       elevation: 3,
       child: ListTile(
-        tileColor: theme.primaryColor,
+        tileColor: customCardColor,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         leading: GestureDetector(
@@ -32,11 +33,12 @@ class TaskItem extends StatelessWidget {
             task.isCompleted
                 ? Icons.check_circle
                 : Icons.radio_button_unchecked,
-            color: task.isCompleted ? Colors.green : Colors.grey,
+            color: task.isCompleted ? customPrimaryColor : customHintColor,
+            size: 32,
           ),
         ),
         title: Text(
-          task.title,
+          task.title.toUpperCase(),
           style: textTheme.titleLarge,
         ),
         subtitle: Text(
@@ -44,7 +46,11 @@ class TaskItem extends StatelessWidget {
           style: textTheme.bodyMedium,
         ),
         trailing: IconButton(
-          icon: const Icon(Icons.delete, color: Colors.red),
+          icon: const Icon(
+            Icons.delete,
+            color: customHintColor,
+            size: 24,
+          ),
           onPressed: onDelete,
         ),
       ),

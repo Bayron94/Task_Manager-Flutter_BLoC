@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:task_app_2024/core/core.dart';
 import 'package:task_app_2024/features/task/presentation/blocs/blocs.dart';
 import 'package:task_app_2024/features/task/presentation/widgets/widgets.dart';
 
@@ -14,6 +15,7 @@ class TasksScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
+        backgroundColor: customBackground,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),
           child: Container(
@@ -23,19 +25,15 @@ class TasksScreen extends StatelessWidget {
               right: 16,
               bottom: 10,
             ),
-            color: theme.secondaryHeaderColor,
             child: Column(
               children: [
                 Center(
-                  child: Text(
-                    'Tus Tareas',
-                    style: textTheme.displayLarge,
-                  ),
+                  child: Text('Tus Tareas', style: textTheme.displayLarge),
                 ),
                 const SizedBox(height: 8),
                 Container(
                   height: 1,
-                  color: Colors.white,
+                  color: customPrimaryColor,
                 ),
               ],
             ),
@@ -62,6 +60,11 @@ class TasksScreen extends StatelessWidget {
                                   : filter == TaskFilter.completed
                                       ? 'Completadas'
                                       : 'No Completadas',
+                              style: TextStyle(
+                                color: isSelected
+                                    ? Colors.white
+                                    : customPrimaryColor,
+                              ),
                             ),
                             selected: isSelected,
                             onSelected: (selected) {
@@ -71,8 +74,17 @@ class TasksScreen extends StatelessWidget {
                                     .add(ChangeFilter(filter));
                               }
                             },
-                            selectedColor: Colors.green,
-                            backgroundColor: Colors.grey.shade300,
+                            selectedColor: customPrimaryColor,
+                            backgroundColor: customCardColor,
+                            side: BorderSide(
+                              color: isSelected
+                                  ? Colors.white
+                                  : customPrimaryColor,
+                              width: 1,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           );
                         }).toList(),
                       ),
@@ -118,6 +130,7 @@ class TasksScreen extends StatelessWidget {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: customPrimaryColor,
           onPressed: () => _showCreateTaskBottomSheet(context),
           child: const Icon(Icons.add),
         ),
@@ -143,10 +156,12 @@ class TasksScreen extends StatelessWidget {
         final textTheme = Theme.of(context).textTheme;
 
         return AlertDialog(
-          backgroundColor: Theme.of(context).dialogBackgroundColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
+          shadowColor: customCardColor,
+          surfaceTintColor: customCardColor,
+          backgroundColor: customCardColor,
           title: Text(
             'Eliminar Tarea',
             style: textTheme.titleLarge,
@@ -160,12 +175,14 @@ class TasksScreen extends StatelessWidget {
               onPressed: () => Navigator.of(context).pop(),
               child: Text(
                 'Cancelar',
-                style: textTheme.bodyLarge?.copyWith(color: Colors.grey),
+                style: textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red, // Rojo para resaltar
+                backgroundColor: customPrimaryColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -190,7 +207,7 @@ class TasksScreen extends StatelessWidget {
       msg: "¡Tarea completada!",
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.green,
+      backgroundColor: customPrimaryColor,
       textColor: Colors.white,
       fontSize: 16,
     );

@@ -5,7 +5,7 @@ import 'package:task_app_2024/core/di/service_locator.dart';
 import 'package:task_app_2024/features/task/presentation/screens/tasks_screen.dart';
 
 import 'core/core.dart';
-import 'features/task/data/models/models.dart';
+import 'features/task/data/models/task_model.dart';
 import 'features/task/presentation/blocs/blocs.dart';
 
 void main() async {
@@ -35,9 +35,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Task Manager',
         debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.system,
+        theme: AppTheme().getTheme(),
         home: const TasksScreen(),
       ),
     );

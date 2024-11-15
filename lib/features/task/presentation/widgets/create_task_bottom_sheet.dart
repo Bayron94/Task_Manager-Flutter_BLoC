@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:task_app_2024/core/core.dart';
 import 'package:task_app_2024/features/task/presentation/blocs/blocs.dart';
 
 class CreateTaskBottomSheet extends StatefulWidget {
@@ -28,18 +29,17 @@ class _CreateTaskBottomSheetState extends State<CreateTaskBottomSheet> {
             ),
           );
 
-      // Simulación de éxito y cierre del BottomSheet
       Future.delayed(const Duration(seconds: 1), () {
         setState(() => _isLoading = false);
         Fluttertoast.showToast(
           msg: "Tarea creada exitosamente",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.green,
+          backgroundColor: customPrimaryColor,
           textColor: Colors.white,
           fontSize: 16,
         );
-        Navigator.of(context).pop(); // Cerrar el BottomSheet
+        Navigator.of(context).pop();
       });
     }
   }
@@ -76,7 +76,7 @@ class _CreateTaskBottomSheetState extends State<CreateTaskBottomSheet> {
             const SizedBox(height: 8),
             Container(
               height: 1,
-              color: Colors.grey.shade300,
+              color: customPrimaryColor,
             ),
             const SizedBox(height: 32),
             TextFormField(
@@ -86,7 +86,7 @@ class _CreateTaskBottomSheetState extends State<CreateTaskBottomSheet> {
                 labelStyle: textTheme.bodyMedium,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Colors.grey),
+                  borderSide: const BorderSide(color: customHintColor),
                 ),
               ),
               validator: (value) {
@@ -104,7 +104,7 @@ class _CreateTaskBottomSheetState extends State<CreateTaskBottomSheet> {
                 labelStyle: textTheme.bodyMedium,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Colors.grey),
+                  borderSide: const BorderSide(color: customHintColor),
                 ),
               ),
               maxLines: 3,
@@ -117,7 +117,7 @@ class _CreateTaskBottomSheetState extends State<CreateTaskBottomSheet> {
                     height: 48,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: customPrimaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
